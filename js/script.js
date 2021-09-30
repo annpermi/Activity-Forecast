@@ -1,17 +1,18 @@
 "use strict";
 var key = config.REACT_APP_KEY;
 
-let clicks = {}; //no it will add on each click
-
-function updateClicks(menu) {
-  let button = menu.id;
-  clicks[button] = clicks[button] + 1 || 1;
-  function reportClicks() {
-    const report = [button, clicks];
-    console.log(...report);
+function updateClicks() {
+  let button;
+  let clicks = {}; //no it will add on each click
+  function reportClicks(menu) {
+    button = menu.id;
+    clicks[button] = clicks[button] + 1 || 1;
+    console.log(button, clicks);
   }
-  reportClicks();
+  return reportClicks;
 }
+
+const report = updateClicks();
 
 const activities = {
   teamIn: ["basketball", "hockey", "volleyball"],
@@ -135,7 +136,7 @@ document.querySelectorAll(".options div").forEach(function (el) {
     "click",
     function (event) {
       updateActivityList(event);
-      updateClicks(event.target);
+      report(event.target);
     },
     false
   );
