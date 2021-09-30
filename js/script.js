@@ -1,11 +1,16 @@
 "use strict";
+var key = config.REACT_APP_KEY;
 
 let clicks = {}; //no it will add on each click
 
 function updateClicks(menu) {
   let button = menu.id;
   clicks[button] = clicks[button] + 1 || 1;
-  // console.log(clicks);
+  function reportClicks() {
+    const report = [button, clicks];
+    console.log(...report);
+  }
+  reportClicks();
 }
 
 const activities = {
@@ -33,7 +38,7 @@ const activities = {
 let state = {};
 let category = "all";
 let url = "http://api.openweathermap.org/data/2.5/weather?q=";
-let apiKey = "e5bc67a21849a5273a21ec7f7d950a4d"; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
+let apiKey = key; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
 function updateActivityList(event) {
   if (event !== undefined && event.target.classList.contains("selected")) {
     return true;
